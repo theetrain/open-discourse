@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.chatWrapper {
+  background-color: #ddd;
+  margin: 1rem;
+  padding: 2rem;
+}
+
+.chat {
+  background-color: #ffffff;
+  padding: 1rem;
+}
+
+.barGraph {
+  margin-top: 1rem;
+}
+
+.graphPoint {
+  display: inline-block;
+  height: 10px;
+}
+
+.graphLabel {
+  margin-right: 0.5rem;
+}
+
+.colour1 {
+  background-color: pink;
+}
+.colour2 {
+  background-color: green;
+}
+.colour3 {
+  background-color: yellow;
+}
+.colour4 {
+  background-color: blue;
+}

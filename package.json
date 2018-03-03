@@ -1,0 +1,39 @@
+{
+  "name": "boilerplate-vscode-js",
+  "version": "0.0.0-development",
+  "private": true,
+  "author": "Enrico Sacchetti <enrico@theetrain.ca>",
+  "license": "ISC",
+  "scripts": {
+    "build": "react-scripts build",
+    "dev": "browser-sync start -s ./src/ -f ./src/** --no-inject-changes",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "lint:ec": "echint ./src",
+    "lint:js": "eslint ./src/**/*.js",
+    "lint:markdown": "markdownlint ./src",
+    "lint": "yarn lint:ec && yarn lint:js && yarn lint:markdown",
+    "test": "react-scripts test --env=jsdom"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "echint": "^4.0.1",
+    "eslint": "^4.10.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "markdownlint-cli": "^0.6.0",
+    "prettier": "^1.8.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.1.1"
+  }
+}
