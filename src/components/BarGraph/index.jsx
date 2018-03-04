@@ -18,6 +18,10 @@ const graphLabel = css`
   cursor: pointer;
 `
 class BarGraph extends React.Component {
+  state = {
+    data: this.props.data
+  }
+
   graphClasses (index) {
     return `${graphLine} colour${index}`
   }
@@ -27,8 +31,11 @@ class BarGraph extends React.Component {
   }
 
   vote (index) {
-    console.log('voted', this.props.data[index])
     this.props.data[index].votes++
+    this.setState({
+      data: this.props.data
+    })
+    console.log('data is now', this.props.data)
   }
 
   getTotal () {
@@ -44,7 +51,7 @@ class BarGraph extends React.Component {
       <div className={barGraph}>
         <div>
           {/* graph labels */}
-          {this.props.data.map((voteCategory, index) => (
+          {this.state.data.map((voteCategory, index) => (
             <button
               type="button"
               className={this.labelClasses(index + 1)}
@@ -60,7 +67,7 @@ class BarGraph extends React.Component {
         </div>
         <div>
           {/* graph */}
-          {this.props.data.map((voteCategory, index) => (
+          {this.state.data.map((voteCategory, index) => (
             <div
               key={`graphPoint_${index}`}
               className={this.graphClasses(index + 1)}
