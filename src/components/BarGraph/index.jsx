@@ -17,59 +17,62 @@ const graphLabel = css`
   padding: 0.5rem 1rem;
   cursor: pointer;
 `
-
-const BarGraph = ({ data, ...rest }) => {
-  // todo make bar graph
-  const total = data.map(el => el.votes).reduce((accumulator, currentValue) => {
-    return accumulator + currentValue
-  }, 0)
-  console.log('Total is', total)
-
-  const graphClasses = index => {
+class BarGraph extends React.Component {
+  graphClasses (index) {
     return `${graphLine} colour${index}`
   }
 
-  const labelClasses = index => {
+  labelClasses (index) {
     return `${graphLabel} colour${index}`
   }
 
-  const vote = i => {
-    console.log('voted', data[i])
-    data[i].votes++
+  vote (index) {
+    console.log('voted', this.props.data[index])
+    this.props.data[index].votes++
   }
 
-  return (
-    <div className={barGraph}>
-      <div>
-        {/* graph labels */}
-        {data.map((voteCategory, index) => (
-          <button
-            type="button"
-            className={labelClasses(index + 1)}
-            key={`graphLabel_${index}`}
-            data-index={index}
-            onClick={() => vote(index)}
-          >
-            {Math.round(voteCategory.votes / total * 1000) / 10 +
-              '% ' +
-              voteCategory.name}
-          </button>
-        ))}
+  getTotal () {
+    return this.props.data
+      .map(el => el.votes)
+      .reduce((accumulator, currentValue) => {
+        return accumulator + currentValue
+      }, 0)
+  }
+
+  render () {
+    return (
+      <div className={barGraph}>
+        <div>
+          {/* graph labels */}
+          {this.props.data.map((voteCategory, index) => (
+            <button
+              type="button"
+              className={this.labelClasses(index + 1)}
+              key={`graphLabel_${index}`}
+              data-index={index}
+              onClick={() => this.vote(index)}
+            >
+              {Math.round(voteCategory.votes / this.getTotal() * 1000) / 10 +
+                '% ' +
+                voteCategory.name}
+            </button>
+          ))}
+        </div>
+        <div>
+          {/* graph */}
+          {this.props.data.map((voteCategory, index) => (
+            <div
+              key={`graphPoint_${index}`}
+              className={this.graphClasses(index + 1)}
+              style={{
+                width: `${voteCategory.votes / this.getTotal() * 100}%`
+              }}
+            />
+          ))}
+        </div>
       </div>
-      <div>
-        {/* graph */}
-        {data.map((voteCategory, index) => (
-          <div
-            key={`graphPoint_${index}`}
-            className={graphClasses(index + 1)}
-            style={{
-              width: `${voteCategory.votes / total * 100}%`
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 BarGraph.propTypes = {
