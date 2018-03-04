@@ -6,28 +6,36 @@ const barGraph = css`
   margin-top: 1rem;
 `
 
-const graphPoint = css`
+const graphLine = css`
   display: inline-block;
-  height: 10px;
+  height: 20px;
+  margin-top: 1rem;
 `
 
 const graphLabel = css`
   margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 `
 
 const BarGraph = ({ data, ...rest }) => {
   // todo make bar graph
-  var total = data.map(el => el.votes).reduce((accumulator, currentValue) => {
+  const total = data.map(el => el.votes).reduce((accumulator, currentValue) => {
     return accumulator + currentValue
   }, 0)
   console.log('Total is', total)
 
-  var graphClasses = index => {
-    return `${graphPoint} colour${index}`
+  const graphClasses = index => {
+    return `${graphLine} colour${index}`
   }
 
-  var labelClasses = index => {
+  const labelClasses = index => {
     return `${graphLabel} colour${index}`
+  }
+
+  const vote = i => {
+    console.log('voted', data[i])
+    data[i].votes++
   }
 
   return (
@@ -35,11 +43,17 @@ const BarGraph = ({ data, ...rest }) => {
       <div>
         {/* graph labels */}
         {data.map((voteCategory, index) => (
-          <span className={labelClasses(index + 1)} key={`graphLabel_${index}`}>
+          <button
+            type="button"
+            className={labelClasses(index + 1)}
+            key={`graphLabel_${index}`}
+            data-index={index}
+            onClick={() => vote(index)}
+          >
             {Math.round(voteCategory.votes / total * 1000) / 10 +
               '% ' +
               voteCategory.name}
-          </span>
+          </button>
         ))}
       </div>
       <div>
