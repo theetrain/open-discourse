@@ -1,17 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { css } from 'emotion'
 
 import BarGraph from '../BarGraph'
 
-const Chat = ({ chats, children, ...rest }) => (
-  <div className="chat">
+const chat = css`
+  background-color: #ffffff;
+  padding: 1rem;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+`
+
+const Chat = ({ meta, children, ...rest }) => (
+  <div className={chat}>
     <div>{children}</div>
-    <BarGraph data={chats[0].voteCategories} />
+    <BarGraph data={meta.voteCategories} />
   </div>
 )
 
 Chat.propTypes = {
-  chats: PropTypes.array.isRequired,
+  meta: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired
 }
 

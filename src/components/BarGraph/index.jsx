@@ -1,5 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { css } from 'emotion'
+
+const barGraph = css`
+  margin-top: 1rem;
+`
+
+const graphPoint = css`
+  display: inline-block;
+  height: 10px;
+`
+
+const graphLabel = css`
+  margin-right: 0.5rem;
+`
 
 const BarGraph = ({ data, ...rest }) => {
   // todo make bar graph
@@ -9,15 +23,15 @@ const BarGraph = ({ data, ...rest }) => {
   console.log('Total is', total)
 
   var graphClasses = index => {
-    return `graphPoint colour${index}`
+    return `${graphPoint} colour${index}`
   }
 
   var labelClasses = index => {
-    return `graphLabel colour${index}`
+    return `${graphLabel} colour${index}`
   }
 
   return (
-    <div className="barGraph">
+    <div className={barGraph}>
       <div>
         {/* graph labels */}
         {data.map((voteCategory, index) => (

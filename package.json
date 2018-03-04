@@ -5,15 +5,19 @@
   "author": "Enrico Sacchetti <enrico@theetrain.ca>",
   "license": "ISC",
   "scripts": {
-    "build": "react-scripts build",
+    "build-css": "node-sass-chokidar src/ -o public/",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
     "dev": "browser-sync start -s ./src/ -f ./src/** --no-inject-changes",
     "eject": "react-scripts eject",
-    "start": "react-scripts start",
     "lint:ec": "echint ./src",
     "lint:js": "eslint ./src/**/*.js",
     "lint:markdown": "markdownlint ./src",
     "lint": "yarn lint:ec && yarn lint:js && yarn lint:markdown",
-    "test": "react-scripts test --env=jsdom"
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "test": "react-scripts test --env=jsdom",
+    "watch-css": "yarn build-css && node-sass-chokidar src/ -o public/ --watch --recursive"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
@@ -31,9 +35,13 @@
     "prettier": "^1.8.1"
   },
   "dependencies": {
+    "emotion": "^9.0.2",
+    "node-sass-chokidar": "^0.0.3",
+    "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-emotion": "^9.0.2",
     "react-scripts": "^1.1.1"
   }
 }

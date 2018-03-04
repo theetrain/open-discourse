@@ -14,6 +14,27 @@ import Chat from './components/Chat'
 
 const chats = [
   {
+    body: `Nothing is free.`,
+    voteCategories: [
+      {
+        name: `Fully Disagree`,
+        votes: 2
+      },
+      {
+        name: `Somewhat Disagree`,
+        votes: 3
+      },
+      {
+        name: `Somewhat Agree`,
+        votes: 5
+      },
+      {
+        name: `Fully Agree`,
+        votes: 4
+      }
+    ]
+  },
+  {
     body: `Do you agree that everyone should have access to fast, efficient, and affordable public transportation?`,
     voteCategories: [
       {
@@ -40,7 +61,7 @@ const App = props => (
   <div>
     <ChatWrapper>
       {chats.map((chat, index) => (
-        <Chat key={index} chats={chats}>
+        <Chat key={index} meta={chats[index]}>
           {chat.body}
         </Chat>
       ))}
